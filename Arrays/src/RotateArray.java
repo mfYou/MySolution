@@ -1,5 +1,8 @@
 import java.util.Arrays;
 
+/**
+ * 把数组后k个转到最前面
+ */
 public class RotateArray {
     public static void main(String args[]){
         int[] array = {1,2,3,4,5,6,7,8};
