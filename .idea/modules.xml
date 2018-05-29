@@ -2,9 +2,10 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/AliInterview/AliInterview.iml" filepath="$PROJECT_DIR$/AliInterview/AliInterview.iml" />
       <module fileurl="file://$PROJECT_DIR$/Arrays/Arrays.iml" filepath="$PROJECT_DIR$/Arrays/Arrays.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Chapter2/Chapter2.iml" filepath="$PROJECT_DIR$/Chapter2/Chapter2.iml" />
       <module fileurl="file://$PROJECT_DIR$/HuaweiTest/HuaweiTest.iml" filepath="$PROJECT_DIR$/HuaweiTest/HuaweiTest.iml" />
-      <module fileurl="file://$PROJECT_DIR$/MySolution.iml" filepath="$PROJECT_DIR$/MySolution.iml" />
       <module fileurl="file://$PROJECT_DIR$/Strings/Strings.iml" filepath="$PROJECT_DIR$/Strings/Strings.iml" />
     </modules>
   </component>
