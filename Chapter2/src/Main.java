@@ -1,65 +1,57 @@
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class Main {
-    static int minLen = Integer.MAX_VALUE;
-
     public static void main(String[] args) {
         Scanner sn = new Scanner(System.in);
-        int num = Integer.parseInt(sn.nextLine().trim());
-        Point[] points = new Point[num];
-        for(int i = 0; i<num; i++){
-            String[] locations = sn.nextLine().trim().split(",");
-            points[i] = new Point(Integer.parseInt(locations[0]), Integer.parseInt(locations[1]));
+        List<Stuff> stuffs = new ArrayList<>();
+        while (sn.hasNextLine()){
+            String[] input = sn.nextLine().trim().split(" ");
+            char[] name = input[0].toCharArray();
+            Stuff stuff = new Stuff(name, Integer.parseInt(input[1]));
+            stuffs.add(stuff);
         }
-        Point start = new Point(0,0);
-        System.out.println(caculate(start,points, 0, 0));
-    }
-
-    public static int caculate(Point start, Point[] points, int sum, int count){
-        System.out.println(points.length);
-        if (count == points.length){
-            minLen = Math.min(minLen, sum+start.getLength(new Point(0,0)));
-            return minLen;
-        }
-
-        for (int i = 0; i<points.length; i++){
-            if (points[i].visited == false){
-                System.out.println(points[i].toString());
-                sum += points[i].getLength(start);
-                if (sum<minLen){
-                    points[i].visited = true;
-                    caculate(points[i], points, sum, count+1);
+        int m =  0;
+        int n = 1;
+        float max = 0;
+        if (stuffs.size()>1){
+            for (int i = 0; i<stuffs.size(); i++){
+                for (int j =i+1; j<stuffs.size(); j++){
+                    if (stuffs.get(i).getSimilar(stuffs.get(j))>max){
+                        m = i;
+                        n = j;
+                        max = stuffs.get(i).getSimilar(stuffs.get(j));
+                    }
                 }
-                sum -= points[i].getLength(start);
-                points[i].visited = false;
             }
         }
-        return minLen;
+        String str1 = new String(stuffs.get(m).name);
+        String str2 = new String(stuffs.get(n).name);
+        System.out.println(str1+" "+stuffs.get(m).popular);
+        System.out.println(str2+" "+stuffs.get(n).popular);
     }
 }
 
+class Stuff{
+    char[] name;
+    int popular;
 
-class Point{
-    int px;
-    int py;
-    boolean visited;
-
-    public Point(int px, int py) {
-        this.px = px;
-        this.py = py;
-        this.visited = false;
+    public Stuff(char[] name, int popular){
+        this.name = name;
+        this.popular = popular;
     }
 
-    public int getLength(Point p){
-        return Math.abs(px - p.px) + Math.abs(py - p.py);
-    }
-
-    @Override
-    public String toString() {
-        return "Point{" +
-                "px=" + px +
-                ", py=" + py +
-                ", visited=" + visited +
-                '}';
+    public float getSimilar(Stuff stuff){
+        float total = stuff.name.length + name.length;
+        float n = 0;
+        for (int i =0; i<name.length; i++){
+            for (int j = 0; j<stuff.name.length; j++){
+                if (name[i]==stuff.name[j]){
+                    n+=1;
+                }
+            }
+        }
+        return n/total;
     }
 }
